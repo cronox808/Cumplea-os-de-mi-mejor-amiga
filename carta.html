@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Carta</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body class="theme-pink">
+
+<canvas id="particle-canvas"></canvas>
+<div class="mc-ground bottom"></div>
+<a class="btn-mc btn-back" href="index.html">⬅ Volver</a>
+
+<div class="mc-scene bg-carta">
+  <div class="mc-content">
+    <h2>Para ti</h2>
+    <div class="carta-box">
+      <p>
+        <!-- Reemplaza este texto con la carta real -->
+        no se que escribir aun.
+      </p>
+      <p>Con cariño,<br>[Tu nombre]</p>
+    </div>
+  </div>
+</div>
+
+<!-- Decoración estilo collage: aparece en todas las páginas -->
+<div class="decor-strip">
+  <img src="assets/img/gusto1.jpg" alt="">
+  <img src="assets/img/gusto2.jpg" alt="">
+  <img src="assets/img/gusto3.jpg" alt="">
+  <img src="assets/img/gusto4.jpg" alt="">
+  <img src="assets/img/gusto5.jpg" alt="">
+</div>
+
+<!-- Canción distinta a la del resto de la página -->
+<audio id="bg-audio" src="assets/audio/cancion-b.mp3" loop autoplay></audio>
+
+<script>
+  const bgAudio = document.getElementById('bg-audio');
+  bgAudio.volume = 0.6;
+  bgAudio.play().catch(() => {});
+</script>
+<script>
+  // Partículas de esta sección: serpentinas/confeti de fiesta
+  window.PARTICLE_TYPE = 'confetti';
+  window.PARTICLE_COLORS = ['#ff6fb1', '#ffd93b', '#6ad6ff', '#8be05a', '#ffffff'];
+</script>
+<script src="js/particles.js"></script>
+<script src="js/sound.js"></script>
+</body>
+</html>

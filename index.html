@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Feliz Cumpleaños</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<canvas id="particle-canvas"></canvas>
+<div class="mc-ground bottom"></div>
+
+<!-- 1) MENSAJE DE PRIVACIDAD -->
+<div class="mc-modal-overlay" id="privacy-overlay">
+  <div class="mc-panel mc-modal">
+    <h2>Página privada</h2>
+    <p>Esta página fue creada especialmente para ti. Es un espacio personal y privado, así que por favor no la compartas con nadie más.</p>
+    <p>Si en algún momento quieres pedir un cambio o agregar algo, contáctame directamente a mí. ❤</p>
+    <button class="btn-mc gold" id="btn-entendido">Entendido</button>
+  </div>
+</div>
+
+<!-- 2) MENÚ PRINCIPAL -->
+<div class="mc-scene bg-menu hidden" id="menu-screen">
+  <div class="mc-content">
+    <h1 style="font-size:2.2rem;">Feliz Cumpleaños</h1>
+    <button class="btn-mc gold" id="btn-jugar">Entrar</button>
+  </div>
+</div>
+
+<!-- 3) OPCIONES -->
+<div class="mc-scene bg-menu hidden" id="options-screen">
+  <div class="mc-content">
+    <h2>Elige un mundo</h2>
+    <!-- Cada tile puede llevar su propia imagen arriba del texto -->
+    <div class="options-grid">
+      <a class="option-tile" href="video.html">
+        <img src="assets/img/icon-video.png" alt="">
+        <span>🎬 Video</span>
+      </a>
+      <a class="option-tile" href="carta.html">
+        <img src="assets/img/icon-carta.png" alt="">
+        <span>💌 Carta</span>
+      </a>
+      <a class="option-tile" href="fotos.html">
+        <img src="assets/img/icon-fotos.png" alt="">
+        <span>🖼️ Fotos</span>
+      </a>
+      <a class="option-tile" href="carta-secreta.html">
+        <img src="assets/img/icon-secreta.png" alt="">
+        <span>🔒 Carta secreta</span>
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- Decoración estilo collage: aparece en todas las páginas -->
+<div class="decor-strip">
+  <img src="assets/img/gusto1.jpg" alt="">
+  <img src="assets/img/gusto2.jpg" alt="">
+  <img src="assets/img/gusto3.jpg" alt="">
+  <img src="assets/img/gusto4.jpg" alt="">
+  <img src="assets/img/gusto5.jpg" alt="">
+</div>
+
+<!-- Música de fondo del menú (misma canción que fotos.html / video.html) -->
+<audio id="bg-audio" src="assets/audio/cancion-a.mp3" loop></audio>
+
+<script>
+  // Partículas del menú: destellos dorados/verdes (por defecto)
+  window.PARTICLE_TYPE = 'sparkle';
+  window.PARTICLE_COLORS = ['#ffd76a', '#8be05a', '#6ad6ff'];
+</script>
+<script src="js/particles.js"></script>
+<script>
+  const overlay = document.getElementById('privacy-overlay');
+  const menuScreen = document.getElementById('menu-screen');
+  const optionsScreen = document.getElementById('options-screen');
+  const audio = document.getElementById('bg-audio');
+
+  document.getElementById('btn-entendido').addEventListener('click', () => {
+    overlay.classList.add('hidden');
+    menuScreen.classList.remove('hidden');
+    // Este clic es la interacción del usuario que permite reproducir audio
+    audio.volume = 0.6;
+    audio.play().catch(() => {/* si el navegador bloquea, seguirá silenciado hasta otro clic */});
+  });
+
+  document.getElementById('btn-jugar').addEventListener('click', () => {
+    menuScreen.classList.add('hidden');
+    optionsScreen.classList.remove('hidden');
+  });
+</script>
+<script src="js/sound.js"></script>
+</body>
+</html>

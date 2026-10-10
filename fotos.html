@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fotos</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body class="theme-brown">
+
+<canvas id="particle-canvas"></canvas>
+<div class="mc-ground bottom"></div>
+<a class="btn-mc btn-back" href="index.html">⬅ Volver</a>
+
+<div class="mc-scene bg-fotos">
+  <div class="mc-content">
+    <h2>Nuestros recuerdos</h2>
+
+    <!-- Línea de tiempo: julio (izquierda) -> octubre (derecha), sin fechas exactas -->
+    <div class="timeline">
+      <div class="timeline-track"></div>
+      <div class="timeline-photos">
+        <!-- Reemplaza cada src por una foto real -->
+        <img src="assets/img/foto1.jpg" alt="Recuerdo 1">
+        <img src="assets/img/foto2.jpg" alt="Recuerdo 2">
+        <img src="assets/img/foto3.jpg" alt="Recuerdo 3">
+        <img src="assets/img/foto4.jpg" alt="Recuerdo 4">
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Decoración estilo collage: aparece en todas las páginas, no solo aquí -->
+<div class="decor-strip">
+  <img src="assets/img/gusto1.jpg" alt="">
+  <img src="assets/img/gusto2.jpg" alt="">
+  <img src="assets/img/gusto3.jpg" alt="">
+  <img src="assets/img/gusto4.jpg" alt="">
+  <img src="assets/img/gusto5.jpg" alt="">
+</div>
+
+<audio id="bg-audio" src="assets/audio/cancion-a.mp3" loop autoplay></audio>
+<script>
+  const bgAudio = document.getElementById('bg-audio');
+  bgAudio.volume = 0.5;
+  bgAudio.play().catch(() => {});
+</script>
+<script>
+  // Partículas de esta sección: hojitas a la deriva
+  window.PARTICLE_TYPE = 'leaves';
+  window.PARTICLE_COLORS = ['#8be05a', '#c9a24a', '#ffd93b'];
+</script>
+<script src="js/particles.js"></script>
+<script src="js/sound.js"></script>
+</body>
+</html>

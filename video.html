@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Video</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body class="theme-blue">
+
+<canvas id="particle-canvas"></canvas>
+<div class="mc-ground bottom"></div>
+<a class="btn-mc btn-back" href="index.html">⬅ Volver</a>
+
+<div class="mc-scene bg-video">
+  <div class="mc-content">
+    <h2>Un video para ti</h2>
+    <div class="mc-panel">
+      <!-- Reemplaza este src por el video real -->
+      <video id="main-video" width="100%" controls style="border:4px solid #1a1a1a;">
+        <source src="assets/video/video-recuerdo.mp4" type="video/mp4">
+        Tu navegador no soporta video HTML5.
+      </video>
+    </div>
+  </div>
+</div>
+
+<!-- Decoración estilo collage: aparece en todas las páginas -->
+<div class="decor-strip">
+  <img src="assets/img/gusto1.jpg" alt="">
+  <img src="assets/img/gusto2.jpg" alt="">
+  <img src="assets/img/gusto3.jpg" alt="">
+  <img src="assets/img/gusto4.jpg" alt="">
+  <img src="assets/img/gusto5.jpg" alt="">
+</div>
+
+<!-- Misma canción de fondo que el menú, se pausa mientras el video suena -->
+<audio id="bg-audio" src="assets/audio/cancion-a.mp3" loop autoplay></audio>
+
+<script>
+  const bgAudio = document.getElementById('bg-audio');
+  const video = document.getElementById('main-video');
+  bgAudio.volume = 0.5;
+  bgAudio.play().catch(() => {});
+
+  video.addEventListener('play', () => bgAudio.pause());
+  video.addEventListener('pause', () => bgAudio.play().catch(() => {}));
+  video.addEventListener('ended', () => bgAudio.play().catch(() => {}));
+</script>
+<script>
+  // Partículas de esta sección: burbujas azules
+  window.PARTICLE_TYPE = 'bubbles';
+  window.PARTICLE_COLORS = ['#6ad6ff', '#a0e9ff', '#3fb8e0'];
+</script>
+<script src="js/particles.js"></script>
+<script src="js/sound.js"></script>
+</body>
+</html>

@@ -1,0 +1,426 @@
+/* ============================================
+   ESTILO GENERAL - Tema Minecraft retro 8-bit
+   ============================================ */
+@font-face {
+  font-family: 'Minecraft';
+  src: url('../assets/fonts/Minecraft.ttf') format('truetype'),
+       url('../assets/fonts/Minecraft.woff') format('woff');
+  font-display: swap;
+}
+
+:root {
+  /* Paleta principal: verde Minecraft, bien vivo */
+  --mc-grass: #6fcf3a;
+  --mc-grass-dark: #2f8f1e;
+  --mc-dirt: #8a5a2b;
+  --mc-stone: #a8a8a8;
+  --mc-stone-dark: #4a4a4a;
+  --mc-sky-1: #1b3a1f;
+  --mc-sky-2: #05100a;
+  --mc-panel: #234a1e;
+  --mc-panel-dark: #14300f;
+  --mc-gold: #83ff3b;
+  --mc-white: #eafbe4;
+  --mc-red: #d1453a;
+  --mc-ink: #0a0f08;
+  font-size: 16px;
+}
+
+/* Tema rosa, solo para la seccion de la carta */
+.theme-pink {
+  --mc-grass: #ff6fb1;
+  --mc-grass-dark: #c9337e;
+  --mc-panel: #7a1f4c;
+  --mc-panel-dark: #4a1030;
+  --mc-sky-1: #3a1b30;
+  --mc-sky-2: #180a14;
+  --mc-gold: #ffd93b;
+  --mc-white: #ffeef7;
+}
+
+/* Tema azul, solo para la seccion de video */
+.theme-blue {
+  --mc-grass: #3fa9e0;
+  --mc-grass-dark: #1f6f9e;
+  --mc-panel: #123a55;
+  --mc-panel-dark: #0a2438;
+  --mc-sky-1: #0d2a3f;
+  --mc-sky-2: #04121c;
+  --mc-gold: #8fe3ff;
+  --mc-white: #eaf6ff;
+}
+
+/* Tema marron, solo para la seccion de fotos */
+.theme-brown {
+  --mc-grass: #a97c50;
+  --mc-grass-dark: #6b4423;
+  --mc-panel: #4a3222;
+  --mc-panel-dark: #2e1f14;
+  --mc-sky-1: #3a2718;
+  --mc-sky-2: #1a120b;
+  --mc-gold: #ffd93b;
+  --mc-white: #f5e9d8;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+  background: var(--mc-sky-2);
+  color: var(--mc-white);
+  font-family: 'Minecraft', 'Courier New', monospace;
+  overflow-x: hidden;
+}
+
+img, canvas, video { image-rendering: pixelated; }
+
+h1, h2, h3 {
+  text-shadow: 3px 3px 0 #000;
+  letter-spacing: 1px;
+  font-weight: normal;
+  line-height: 1.4;
+  animation: pop-in .4s ease-out;
+}
+
+p, li { line-height: 1.6; }
+
+a { color: inherit; }
+
+/* Panel tipo "inventario" de Minecraft */
+.mc-panel {
+  background: var(--mc-panel);
+  border: 4px solid var(--mc-ink);
+  box-shadow:
+    inset 3px 3px 0 rgba(255,255,255,.10),
+    inset -3px -3px 0 rgba(0,0,0,.5);
+  padding: 24px;
+}
+
+/* Botones estilo Minecraft, con mas vida */
+.btn-mc {
+  display: inline-block;
+  font-family: inherit;
+  font-size: 1rem;
+  color: var(--mc-white);
+  text-shadow: 2px 2px 0 #000;
+  background: linear-gradient(var(--mc-grass), var(--mc-grass-dark));
+  border: none;
+  box-shadow:
+    inset 2px 2px 0 rgba(255,255,255,.35),
+    inset -2px -2px 0 rgba(0,0,0,.45),
+    0 0 0 3px var(--mc-ink);
+  padding: 14px 26px;
+  margin: 8px;
+  cursor: pointer;
+  text-decoration: none;
+  text-align: center;
+  transition: transform .12s, background .15s;
+}
+.btn-mc:hover {
+  transform: scale(1.05) rotate(-1deg);
+  filter: brightness(1.12);
+}
+.btn-mc:active {
+  transform: scale(.95);
+  box-shadow:
+    inset -2px -2px 0 rgba(255,255,255,.35),
+    inset 2px 2px 0 rgba(0,0,0,.45),
+    0 0 0 3px var(--mc-ink);
+}
+.btn-mc.gold {
+  background: linear-gradient(#ffe98a, var(--mc-gold));
+  color: #3a2600;
+  text-shadow: 1px 1px 0 rgba(255,255,255,.4);
+  animation: pulse-gold 1.6s infinite;
+}
+
+/* ---------- Escena / fondo con imagen oculta por seccion ---------- */
+.mc-scene {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 32px 16px;
+  background-color: var(--mc-sky-2);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+/* Una clase por seccion, con su propia imagen. Coloca el archivo con
+   ese nombre exacto en assets/img/ y aparece solo, sin tocar el HTML. */
+.bg-menu    { background-image: url('../assets/img/bg-menu.jpg'); }
+.bg-video   { background-image: url('../assets/img/bg-video.jpg'); }
+.bg-carta   { background-image: url('../assets/img/bg-carta.jpg'); }
+.bg-fotos   { background-image: url('../assets/img/bg-fotos.jpg'); }
+.bg-secreta { background-image: url('../assets/img/bg-secreta.jpg'); }
+
+/* Capa oscura sobre la imagen de fondo para que el texto se siga leyendo */
+.mc-scene::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(rgba(5,10,6,.45), rgba(5,10,6,.7));
+  z-index: 0;
+}
+
+#particle-canvas {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.mc-content {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 720px;
+  text-align: center;
+}
+
+/* Franja de "tierra y pasto" decorativa */
+.mc-ground {
+  position: fixed;
+  left: 0; right: 0;
+  height: 28px;
+  background: repeating-linear-gradient(90deg, var(--mc-grass) 0 32px, var(--mc-grass-dark) 32px 34px);
+  border-top: 6px solid var(--mc-dirt);
+  z-index: 1;
+}
+.mc-ground.top { top: 0; transform: rotate(180deg); }
+.mc-ground.bottom { bottom: 0; }
+
+.hidden { display: none !important; }
+
+/* Modal de privacidad */
+.mc-modal-overlay {
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,.88);
+  display: flex; align-items: center; justify-content: center;
+  z-index: 20;
+  padding: 16px;
+}
+.mc-modal {
+  max-width: 480px;
+  animation: pop-in .35s ease-out;
+}
+.mc-modal p { font-size: .95rem; }
+
+/* Volver */
+.btn-back {
+  position: fixed;
+  top: 16px; left: 16px;
+  z-index: 5;
+}
+
+/* ---------- Tiles del menu de opciones (con icono arriba del texto) ---------- */
+.options-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  justify-content: center;
+}
+.option-tile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  width: 150px;
+  padding: 16px 10px;
+  background: var(--mc-panel);
+  border: 4px solid var(--mc-ink);
+  box-shadow:
+    inset 2px 2px 0 rgba(255,255,255,.12),
+    inset -2px -2px 0 rgba(0,0,0,.5);
+  text-decoration: none;
+  color: var(--mc-white);
+  text-shadow: 2px 2px 0 #000;
+  transition: transform .15s, filter .15s;
+  animation: float 3s ease-in-out infinite;
+}
+.option-tile:nth-child(2) { animation-delay: .3s; }
+.option-tile:nth-child(3) { animation-delay: .6s; }
+.option-tile:nth-child(4) { animation-delay: .9s; }
+.option-tile:hover {
+  transform: scale(1.08) rotate(1deg);
+  filter: brightness(1.15);
+}
+.option-tile img {
+  width: 56px;
+  height: 56px;
+  object-fit: cover;
+  border: 3px solid var(--mc-ink);
+}
+.option-tile span { font-size: .95rem; }
+
+/* ---------- Tira de decoracion tipo collage (en TODAS las paginas) ---------- */
+.decor-strip {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin: 28px auto 40px;
+  padding: 0 10px;
+}
+.decor-strip img {
+  width: 64px;
+  height: 64px;
+  object-fit: cover;
+  border: 4px solid var(--mc-ink);
+  box-shadow: inset 2px 2px 0 rgba(255,255,255,.2), inset -2px -2px 0 rgba(0,0,0,.4);
+  transform: rotate(var(--r, 0deg));
+  animation: float 4s ease-in-out infinite;
+}
+.decor-strip img:nth-child(1) { --r: -6deg; animation-delay: 0s; }
+.decor-strip img:nth-child(2) { --r: 4deg;  animation-delay: .4s; }
+.decor-strip img:nth-child(3) { --r: -3deg; animation-delay: .8s; }
+.decor-strip img:nth-child(4) { --r: 6deg;  animation-delay: 1.2s; }
+.decor-strip img:nth-child(5) { --r: -5deg; animation-delay: 1.6s; }
+
+/* Linea de tiempo (seccion fotos) */
+.timeline {
+  position: relative;
+  width: 100%;
+  padding: 40px 0;
+}
+.timeline-track {
+  position: relative;
+  height: 6px;
+  background: var(--mc-stone);
+  border: 2px solid #000;
+  margin: 40px 20px;
+}
+.timeline-track::before, .timeline-track::after {
+  content: attr(data-label);
+  position: absolute;
+  top: -34px;
+  font-size: .85rem;
+  text-shadow: 2px 2px 0 #000;
+  color: var(--mc-gold);
+}
+.timeline-track::before { left: 0; content: "Julio"; }
+.timeline-track::after { right: 0; content: "Octubre"; }
+.timeline-photos {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 10px;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+.timeline-photos img {
+  width: 110px;
+  height: 110px;
+  object-fit: cover;
+  border: 4px solid var(--mc-ink);
+  transition: transform .15s;
+}
+.timeline-photos img:hover { transform: scale(1.06) rotate(-2deg); }
+
+/* Carta (usa .theme-pink en <body> para la paleta rosa) */
+.carta-box {
+  background: #e9dcb8;
+  color: #2b2110;
+  text-shadow: none;
+  border: 6px solid #5c4322;
+  padding: 32px;
+  text-align: left;
+  font-family: 'Minecraft', 'Courier New', monospace;
+  max-width: 600px;
+  margin: 0 auto;
+  animation: pop-in .4s ease-out;
+}
+.carta-box h2 { color: #2b2110; text-shadow: none; }
+body.theme-pink .carta-box {
+  background: #fff0f7;
+  color: #5c1030;
+  border-color: var(--mc-grass-dark);
+}
+body.theme-pink .carta-box h2 { color: #5c1030; }
+
+/* Formulario contrasena */
+.pw-form input {
+  font-family: inherit;
+  font-size: 1rem;
+  padding: 10px;
+  border: 3px solid var(--mc-ink);
+  background: #1a1a1a;
+  color: #fff;
+  margin-bottom: 10px;
+  width: 220px;
+  text-align: center;
+}
+.pw-form.shake { animation: shake .35s; }
+
+.error-msg {
+  color: #ff8080;
+  font-size: .85rem;
+  min-height: 1.2em;
+}
+
+img, video { max-width: 100%; height: auto; }
+
+/* ---------- Animaciones ---------- */
+@keyframes pop-in {
+  0%   { opacity: 0; transform: scale(.85) translateY(8px); }
+  100% { opacity: 1; transform: scale(1) translateY(0); }
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0) rotate(var(--r, 0deg)); }
+  50%      { transform: translateY(-8px) rotate(var(--r, 0deg)); }
+}
+@keyframes pulse-gold {
+  0%, 100% { filter: brightness(1); }
+  50%      { filter: brightness(1.18); }
+}
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25%      { transform: translateX(-6px); }
+  75%      { transform: translateX(6px); }
+}
+
+/* ============================================
+   RESPONSIVE - pensado primero para celular
+   ============================================ */
+@media (max-width: 600px) {
+  .mc-scene { padding: 24px 12px; }
+  .mc-panel, .carta-box { padding: 16px; width: 100%; max-width: 100%; }
+  .btn-mc {
+    display: block;
+    width: 100%;
+    max-width: 300px;
+    margin: 8px auto;
+    box-sizing: border-box;
+  }
+  .btn-back { top: 10px; left: 10px; padding: 10px 16px; }
+  .pw-form input { width: 100%; max-width: 260px; }
+  .timeline-track { margin: 34px 8px; }
+  .timeline-track::before, .timeline-track::after { font-size: .75rem; }
+  .timeline-photos { justify-content: center; }
+  .option-tile { width: 130px; }
+}
+
+@media (max-width: 480px) {
+  :root { font-size: 14px; }
+  h1 { font-size: 1.6rem !important; }
+  .decor-strip img { width: 52px; height: 52px; }
+  .timeline-photos img { width: 80px; height: 80px; }
+  .option-tile { width: 44%; }
+}
+
+@media (max-width: 340px) {
+  :root { font-size: 13px; }
+  .decor-strip img { width: 46px; height: 46px; }
+  .timeline-photos img { width: 66px; height: 66px; }
+}
+
+/* Respeta si la persona tiene animaciones reducidas activadas */
+@media (prefers-reduced-motion: reduce) {
+  #particle-canvas { display: none; }
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
